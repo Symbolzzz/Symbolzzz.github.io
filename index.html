@@ -195,7 +195,7 @@
                                     <span class="papertitle">Personalized 3D Co-Speech Gesture Generation via Style
                                         Extraction from a Single Video</span>
                                     <br>
-                                    <strong>Enyun Xuan</strong>
+                                    <strong>Enyun Xuan</strong>,
                                     You Li,
                                     Ziwei Li,
                                     Jiangqi Li,
@@ -387,6 +387,58 @@
                 }
             },
             "retina_detect": true
+        });
+    </script>
+    <!-- Image Zoom Hover Effect -->
+    <script>
+        document.querySelectorAll('.one').forEach(function(container) {
+            const thumb = container.querySelector('img:first-child');
+            const overlay = container.querySelector('.img-zoom-overlay');
+            if (!thumb || !overlay) return;
+
+            container.addEventListener('mouseenter', function() {
+                const rect = thumb.getBoundingClientRect();
+                // Start position: same as the thumbnail
+                overlay.style.transition = 'none';
+                overlay.style.top = rect.top + 'px';
+                overlay.style.left = rect.left + 'px';
+                overlay.style.width = rect.width + 'px';
+                overlay.style.height = rect.height + 'px';
+                overlay.style.transform = 'none';
+                overlay.style.opacity = '0';
+                overlay.classList.remove('zoom-active');
+
+                // Force reflow
+                overlay.offsetHeight;
+
+                // Animate to center
+                overlay.style.transition = 'opacity 0.4s ease, top 0.4s ease, left 0.4s ease, width 0.4s ease, height 0.4s ease';
+                const targetW = Math.min(window.innerWidth * 0.45, overlay.naturalWidth);
+                const targetH = Math.min(window.innerHeight * 0.45, overlay.naturalHeight);
+                // Maintain aspect ratio
+                const ratio = Math.min(targetW / overlay.naturalWidth, targetH / overlay.naturalHeight);
+                const finalW = overlay.naturalWidth * ratio;
+                const finalH = overlay.naturalHeight * ratio;
+
+                overlay.style.top = (window.innerHeight / 2 - finalH / 2) + 'px';
+                overlay.style.left = (window.innerWidth / 2 - finalW / 2) + 'px';
+                overlay.style.width = finalW + 'px';
+                overlay.style.height = finalH + 'px';
+                overlay.style.opacity = '1';
+                overlay.classList.add('zoom-active');
+            });
+
+            container.addEventListener('mouseleave', function() {
+                const rect = thumb.getBoundingClientRect();
+                // Animate back to thumbnail position
+                overlay.style.transition = 'opacity 0.3s ease, top 0.3s ease, left 0.3s ease, width 0.3s ease, height 0.3s ease';
+                overlay.style.top = rect.top + 'px';
+                overlay.style.left = rect.left + 'px';
+                overlay.style.width = rect.width + 'px';
+                overlay.style.height = rect.height + 'px';
+                overlay.style.opacity = '0';
+                overlay.classList.remove('zoom-active');
+            });
         });
     </script>
 </body>

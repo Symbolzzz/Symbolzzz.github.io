@@ -137,25 +137,27 @@ h2 {
 
 .one img {
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
 }
 
-.one:hover .img-zoom-overlay {
-  display: block;
+.one:hover > img:first-child {
+  transform: scale(1.05);
 }
 
 .img-zoom-overlay {
-  display: none;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 9999;
-  max-width: 70vw;
-  max-height: 70vh;
+  max-width: 45vw;
+  max-height: 45vh;
   border-radius: 8px;
-  box-shadow: 0 0 40px rgba(109, 179, 248, 0.4);
+  box-shadow: 0 0 30px rgba(109, 179, 248, 0.35);
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease, top 0.4s ease, left 0.4s ease, width 0.4s ease, height 0.4s ease;
+}
+
+.img-zoom-overlay.zoom-active {
+  opacity: 1;
 }
 
 .two {
